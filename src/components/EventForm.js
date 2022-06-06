@@ -8,44 +8,51 @@ import AppContext from '../contexts/AppContext'
 
 const EventForm = () => {
     const { state, dispatch } = useContext(AppContext)
-    const [title, setTitle] = useState('')
-    const [body, setBody] = useState('')
+    const [name, setName] = useState('')
+    const [price, setPrice] = useState('')
+    const [count, setCount] = useState('')
 
     const addEvent = e => {
         e.preventdefault()
         dispatch({
             type: CREATE_EVENT,
-            title,
-            body
+            name,
+            price,
+            count
         })
 
-        setTitle('')
-        setBody('')
+        setName('')
+        setPrice('')
+        setCount('')
     }
 
     const deleteAllEvents = e => {
         e.preventDefault()
-        const result = window.confirm('全てのイベントを本当に削除しても良いですか？')
+        const result = window.confirm('全ての在庫情報を本当に削除しても良いですか？')
         if (result) dispatch({ type: DELETE_ALL_EVENTS })
     }
 
-    const unCreatable = title === '' || body === ''
+    const unCreatable = name === '' || price === '' || count === ''
 
     return (
         <>
             <h4>イベント作成フォーム</h4>
             <form>
                 <div className='form-group'>
-                    <label htmlFor="formEventTitle">タイトル</label>
-                    <input className="form-controll" id="formEventTitle" value={title} onChange={e => setTitle(e.target.value)} />
+                    <label htmlFor="formItemName">商品名</label>
+                    <input className="form-controll" id="formItemName" value={name} onChange={e => setName(e.target.value)} />
                 </div>
                 <div className='form-group'>
-                    <label htmlFor="formEventTitle">ボディー</label>
-                    <textarea className="form-controll" id="formEventBody" value={body} onCHange={e => setBody(e.target.value)} />
+                    <label htmlFor="formItemPrice">値段</label>
+                    <input type="number" className="form-controll" id="formItemPrice" value={price} onChange={e => setPrice(e.target.value)} />
+                </div>
+                <div className='form-group'>
+                    <label htmlFor="formItemCount">個数</label>
+                    <input type="number" className="form-controll" id="formItemCount" value={count} onChange={e => setCount(e.target.value)} />
                 </div>
 
-                <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>イベントを作成する</button>
-                <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>全てのイベントを削除する</button>
+                <button className="btn btn-primary" onClick={addEvent} disabled={unCreatable}>在庫情報を作成する</button>
+                <button className="btn btn-danger" onClick={deleteAllEvents} disabled={state.length === 0}>全ての在庫情報を削除する</button>
                 <button className="btn btn-danger">全ての操作ログを削除する</button>
             </form>
         </>

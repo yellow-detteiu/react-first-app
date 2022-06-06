@@ -8,13 +8,14 @@ const Events = () => {
 
     return (
         <>
-            <h4>イベント一覧</h4>
+            <h4>在庫一覧</h4>
             <table className="table table-hover">
                 <thred>
                     <tr>
                         <th>ID</th>
-                        <th>タイトル</th>
-                        <th>ボディー</th>
+                        <th>商品名</th>
+                        <th>値段</th>
+                        <th>個数</th>
                     </tr>
                 </thred>
                 <tbody>
